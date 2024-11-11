@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NanaChain Wedding</title>
+    <meta name="description" content="YOU ARE INVITED TO OUR WEDDING CEREMONY">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-weight: 300;
+            font-size: 1.5rem;
+            color: #666;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto 4rem;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .save-date {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .save-date h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .wedding-date {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .invitation-text {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .invitation-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .best-moment {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #eee;
+        }
+
+        .best-moment h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .best-moment .ever {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .gallery {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .gallery-item {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-row:nth-child(1),
+        .gallery-row:nth-child(2) {
+            height: 320px;
+        }
+
+        .gallery-section {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            background-color: #f8f8f8;
+        }
+
+        .gallery-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-subtitle::before,
+        .gallery-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 100px;
+            height: 1px;
+            background-color: #666;
+        }
+
+        .gallery-subtitle::before {
+            right: calc(100% + 1rem);
+        }
+
+        .gallery-subtitle::after {
+            left: calc(100% + 1rem);
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.3);
+            user-select: none;
+            text-decoration: none;
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .pause-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Wedding Date Section */
+        .wedding-date-section {
+            text-align: center;
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .date-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .date-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .date-detail {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .month {
+            color: #1a365d;
+        }
+
+        .date-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .hello-text {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .join-button {
+            background-color: #8b7355;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .join-button:hover {
+            background-color: #6b5a43;
+        }
+
+        .note {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Wedding Schedule Section */
+        .schedule-section {
+            text-align: center;
+            padding: 4rem 0;
+            background-color: #f8f8f8;
+        }
+
+        .schedule-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .schedule-subtitle::before,
+        .schedule-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 100px;
+            height: 1px;
+            background-color: #666;
+        }
+
+        .schedule-subtitle::before {
+            right: calc(100% + 1rem);
+        }
+
+        .schedule-subtitle::after {
+            left: calc(100% + 1rem);
+        }
+
+        .schedule-items {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .schedule-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .schedule-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .schedule-time {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-name {
+            color: #666;
+        }
+
+        .floating-heart {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: #ff6b6b;
+            animation: bounce 2s infinite;
+        }
+        .theme-color-section {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: #fff;
+}
+
+.theme-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.theme-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.theme-subtitle::before,
+.theme-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 1px;
+    background-color: #666;
+}
+
+.theme-subtitle::before {
+    right: calc(100% + 1rem);
+}
+
+.theme-subtitle::after {
+    left: calc(100% + 1rem);
+}
+
+.color-items {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.color-item {
+    text-align: center;
+}
+
+.color-heart {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+    position: relative;
+    transform: rotate(-45deg);
+    background-color: #ccc;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-heart:before,
+.color-heart:after {
+    content: '';
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: inherit;
+    position: absolute;
+}
+
+.color-heart:before {
+    top: -50px;
+    left: 0;
+}
+
+.color-heart:after {
+    left: 50px;
+    top: 0;
+}
+
+.color-name {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 2rem;
+    .location-section {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: #f8f8f8;
+}
+
+.location-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.location-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.location-subtitle::before,
+.location-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 1px;
+    background-color: #666;
+}
+
+.location-subtitle::before {
+    right: calc(100% + 1rem);
+}
+
+.location-subtitle::after {
+    left: calc(100% + 1rem);
+}
+
+.location-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.location-info {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.location-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.venue-name {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.venue-name-en {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.map-button {
+    display: inline-block;
+    background-color: #8b7355;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.map-button:hover {
+    background-color: #6b5a43;
+}
+
+.map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.venue-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.venue-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .main-title {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .wedding-date {
+                font-size: 1.5rem;
+            }
+
+            .gallery-row {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .schedule-items {
+                gap: 2rem;
+            }
+    
+            .schedule-item {
+                min-width: 150px;
+            }
+    
+            .date-title {
+                font-size: 2.5rem;
+            }
+    
+            .date-detail {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .save-date h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">NanaChain Wedding</h1>
+            <h2 class="subtitle">TO BE CONTINUES</h2>
+        </header>
+
+        <main>
+            <img src="h1.jpg" alt="Wedding couple" class="main-image">
+
+            <section class="save-date">
+                <h2>Save The Date</h2>
+                <div class="wedding-date">comming soon</div>
+                
+                <div class="invitation-text">
+                    <p>YOU ARE INVITED TO OUR WEDDING CEREMONY</p>
+                    <p>AND TO THE CELEBRATION OF OUR MARRIAGE</p>
+                    <p>DON'T MISS TO MEET US AND WE HOPE TO SEE YOU ON OUR SPECIAL DAY</p>
+                </div>
+            </section>
+
+            <section class="best-moment">
+                <h2>Best Moment</h2>
+                <div class="ever">EVER</div>
+                
+                <div class="gallery">
+                    <!-- Row 1 -->
+                    <div class="gallery-row">
+                        <div class="gallery-item">
+                            <img src="s1.jpg" alt="Our precious moment 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="s2.jpg" alt="Our precious moment 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="s3.jpg" alt="Our precious moment 3">
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="gallery-row">
+                        <div class="gallery-item">
+                            <img src="s4.jpg" alt="Our precious moment 4">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="s5.jpg" alt="Our precious moment 5">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="s6.jpg" alt="Our precious moment 6">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="gallery-section">
+                <h2 class="gallery-title">Gallery</h2>
+                <div class="gallery-subtitle">PHOTO</div>
+                
+                <div class="slideshow-container">
+                    <div class="slide">
+                        <img src="s1.jpg" alt="Photo 1">
+                        <div class="slide-number">1 / 6</div>
+                        <div class="pause-btn">⏸</div>
+                    </div>
+                    <div class="slide">
+                        <img src="s2.jpg" alt="Photo 2">
+                        <div class="slide-number">2 / 6</div>
+                        <div class="pause-btn">⏸</div>
+                    </div>
+                    <div class="slide">
+                        <img src="s3.jpg" alt="Photo 3">
+                        <div class="slide-number">3 / 6</div>
+                        <div class="pause-btn">⏸</div>
+                    </div>
+                    <div class="slide">
+                        <img src="s4.jpg" alt="Photo 4">
+                        <div class="slide-number">4 / 6</div>
+                        <div class="pause-btn">⏸</div>
+                    </div>
+                    <div class="slide">
+                        <img src="s5.jpg" alt="Photo 5">
+                        <div class="slide-number">5 / 6</div>
+                    </div>
+                    <div class="slide">
+                        <img src="s6.jpg" alt="Photo 6">
+                        <div class="slide-number">6 / 6</div>
+                        <div class="pause-btn">⏸</div>
+                    </div>
+                    
+                    <a class="prev" onclick="changeSlide(-1)">❮</a>
+                    <a class="next" onclick="changeSlide(1)">❯</a>
+                </div>
+            </section>
+
+            <section class="wedding-date-section">
+                <div class="date-content">
+                    <h2 class="date-title">commingsoon</h2>
+                    <div class="date-detail"> <span class="month"></span> </div>
+                    <p class="date-description">Please join us in celebrating our love and marriage, countdown in...</p>
+                    <div class="hello-text">Hello World!!</div>
+                    <button class="join-button">สมัครเข้าร่วมงาน (คลิก) <span class="arrow">➜</span></button>
+                    <p class="note">*กรอกข้อมูลเพื่อสำรองที่นั่ง</p>
+                </div>
+            </section>
+
+            <section class="schedule-section">
+                <h2 class="schedule-title">Wedding Schedule</h2>
+                <div class="schedule-subtitle">ACTIVITY</div>
+                
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <div class="schedule-icon">🚗</div>
+                        <div class="schedule-time">08 : 29 น.</div>
+                        <div class="schedule-name">แห่ขันหมาก</div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="schedule-icon">💍</div>
+                        <div class="schedule-time">09 : 19 น.</div>
+                        <div class="schedule-name">พิธีหมั้น</div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="schedule-icon">👰🤵</div>
+                        <div class="schedule-time">09 : 59 น.</div>
+                        <div class="schedule-name">รดน้ำสังข์ / รับไหว้</div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="schedule-icon">🥂</div>
+                        <div class="schedule-time">12 : 09 น.</div>
+                        <div class="schedule-name">ฉลองมงคลสมรส</div>
+                    </div>
+                </div>
+            </section>
+            <section class="theme-color-section">
+                <h2 class="theme-title">Theme Color</h2>
+                <div class="theme-subtitle">COLOR</div>
+                
+                <div class="color-items">
+                    <div class="color-item">
+                        <div class="color-heart" style="background-color: #A9D0F5;"><!-- สีฟ้าอ่อน --></div>
+                        <div class="color-name">สีฟ้า</div>
+                    </div>
+                    
+                    <div class="color-item">
+                        <div class="color-heart" style="background-color: #FFB6C1;"><!-- สีชมพูอ่อน --></div>
+                        <div class="color-name">สีชมพู</div>
+                    </div>
+                    
+                    <div class="color-item">
+                        <div class="color-heart" style="background-color: #FFF5E1;"><!-- สีครีม --></div>
+                        <div class="color-name">สีครีม</div>
+                    </div>
+                </div>
+            </section>
+            <section class="location-section">
+                <h2 class="location-title">Location</h2>
+                <div class="location-subtitle">MAPS</div>
+                
+                <div class="location-content">
+                    <div class="location-info">
+                        <div class="location-icon">📍</div>
+                        <h3 class="venue-name">โอ๊ควู๊ด โฮเทล แอนด์ เรสซิเดนซ์ ศรีราชา</h3>
+                        <p class="venue-name-en">(OAKWOOD HOTEL AND RESIDENCE SRIRACHA)</p>
+                        <a href="https://maps.app.goo.gl/Ho3JwvD7k7QuuUEM9" target="_blank" class="map-button">ปักหมุดแผนที่ (คลิก)</a>
+                    </div>
+                    
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.9197249633287!2d100.8815493!3d13.1689567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b7c3d8c28efd%3A0x1d647840cd349c24!2sOakwood%20Hotel%20%26%20Residence%20Sri%20Racha!5e0!3m2!1sen!2sth!4v1699686145779!5m2!1sen!2sth" 
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+            
+                    <div class="venue-images">
+                        <img src="venue1.jpg" alt="Venue view 1" class="venue-img">
+                        <img src="venue2.jpg" alt="Venue view 2" class="venue-img">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="floating-heart">❤</div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        let slideInterval;
+        let isPlaying = true;
+
+        function showSlides(n) {
+            const slides = document.getElementsByClassName("slide");
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function togglePlay() {
+            const pauseBtns = document.getElementsByClassName("pause-btn");
+            isPlaying = !isPlaying;
+            
+            for (let btn of pauseBtns) {
+                btn.innerHTML = isPlaying ? "⏸" : "▶";
+            }
+            
+            if (isPlaying) {
+                startSlideshow();
+            } else {
+                clearInterval(slideInterval);
+            }
+        }
+
+        function startSlideshow() {
+            slideInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000);
+        }
+
+        // Initialize slideshow
+        showSlides(slideIndex);
+        startSlideshow();
+
+        // Add click event to pause buttons
+        const pauseBtns = document.getElementsByClassName("pause-btn");
+        for (let btn of pauseBtns) {
+            btn.addEventListener("click", togglePlay);
+        }
+    </script>
+</body>
+</html>
